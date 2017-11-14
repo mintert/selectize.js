@@ -1138,10 +1138,16 @@ $.extend(Selectize.prototype, {
 			}
 		}
 
-		// add "selected" class to selected options
-		if (!self.settings.hideSelected) {
-			for (i = 0, n = self.items.length; i < n; i++) {
-				self.getOption(self.items[i]).addClass('selected');
+
+		var options = Object.keys(self.options);
+
+		for (i = 0, n = options.length; i < n; i++) {
+			option = self.getOption(options[i]);
+			option.removeClass('selected');
+
+			// add "selected" class to selected options
+			if (!self.settings.hideSelected && self.items.indexOf(options[i]) !== -1) {
+				option.addClass('selected');
 			}
 		}
 
